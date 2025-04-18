@@ -1,0 +1,71 @@
+import random
+import string
+import json
+import os
+
+def generate_user_id():
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+
+def load_users(filename='users.json'):
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            return json.load(file)
+    return {}
+
+def save_users(users, filename='users.json'):
+    with open(filename, 'w') as file:
+        json.dump(users, file, indent=4)
+
+def register_user(users):
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+
+    if username in users:
+        print("Username already exists!")
+        return users
+
+    user_id = generate_user_id()
+    users[username] = {
+        'password': password,
+        'user_id': user_id,
+        'stars': 0,
+        'booky_tokens': 0,
+        'pages_read': 0
+    }
+    print(f"Account created! Your ID: {user_id}")
+    return users
+
+def login_user(users):
+    username = input("Username: ")
+    password = input("Password: ")
+
+    if username in users and users[username]['password'] == password:
+        print(f"Welcome back, {username}!")
+        return username
+    else:
+        print("Invalid credentials.")
+        return None
+
+def reward_user(users, username):
+    users[username]['pages_read'] += 10
+    if users[username]['pages_read'] >= 10:
+        users[username]['stars'] += 1
+        users[username]['booky_tokens'] += 5
+        print("Congrats! You've earned 1 star and 5 Booky tokens!")
+    return users
+
+# Sample run
+users = load_users()
+
+while True:
+    choice = input("1. Register\n2. Login\n3. Exit\nChoose an option: ")
+    if choice == '1':
+        users = register_user(users)
+        save_users(users)
+    elif choice == '2':
+        user = login_user(users)
+        if user:
+            users = reward_user(users, user)
+            save_users(users)
+    elif choice == '3':
+        break
