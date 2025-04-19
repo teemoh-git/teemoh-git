@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cstdlib>
+
+int main() {
+    int choice;
+    std::cout << "Enter a number: ";
+    std::cin >> choice;
+
+    // Choose the URL based on the input
+    std::string url = "https://example.com/?value=" + std::to_string(choice);
+
+#ifdef _WIN32
+    std::string command = "start " + url; // Windows
+#elif __APPLE__
+    std::string command = "open " + url;  // macOS
+#else
+    std::string command = "xdg-open " + url; // Linux
+#endif
+
+    system(command.c_str()); // Executes the command to open the URL
+
+    return 0;
+}
