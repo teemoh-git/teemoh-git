@@ -1,0 +1,54 @@
+#include <QApplication>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QDialog>
+#include <QLineEdit>
+#include <QLabel>
+#include <QPushButton>
+#include <QVBoxLayout>
+
+void showDashboard() {
+    QMessageBox::information(nullptr, "Dashboard", "Welcome to your dashboard!");
+}
+
+void showLogin() {
+    QDialog loginDialog;
+    QVBoxLayout layout;
+
+    QLabel usernameLabel("Username:");
+    QLineEdit usernameEdit;
+    layout.addWidget(&usernameLabel);
+    layout.addWidget(&usernameEdit);
+
+    QLabel passwordLabel("Password:");
+    QLineEdit passwordEdit;
+    passwordEdit.setEchoMode(QLineEdit::Password);
+    layout.addWidget(&passwordLabel);
+    layout.addWidget(&passwordEdit);
+
+    QPushButton dashboardBtn("Go to Dashboard");
+    layout.addWidget(&dashboardBtn);
+
+    QObject::connect(&dashboardBtn, &QPushButton::clicked, [&]() {
+        loginDialog.accept();
+        showDashboard();
+    });
+
+    loginDialog.setLayout(&layout);
+    loginDialog.exec();
+}
+
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    bool ok;
+    QString input = QInputDialog::getText(nullptr, "Initialize", "Welcome! Enter 1 to begin:", QLineEdit::Normal, "", &ok);
+
+    if (ok && input == "1") {
+        showLogin();
+    } else {
+        QMessageBox::warning(nullptr, "Error", "Invalid input. Try again.");
+    }
+
+    return 0;
+}
