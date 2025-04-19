@@ -1,0 +1,28 @@
+import tkinter as tk
+import webbrowser
+
+def show_message_box():
+    msg_box = tk.Toplevel()
+    msg_box.title("Information")
+    msg_box.geometry("300x120")
+    msg_box.resizable(False, False)
+
+    msg_label = tk.Label(msg_box, text="For more info, visit:", pady=10)
+    msg_label.pack()
+
+    link_label = tk.Label(msg_box, text="https://example.com", fg="blue", cursor="hand2")
+    link_label.pack()
+
+    link_label.bind("<Button-1>", lambda e: webbrowser.open_new("https://example.com"))
+
+    ok_button = tk.Button(msg_box, text="OK", command=msg_box.destroy)
+    ok_button.pack(pady=10)
+
+    # Optional: disable interaction with the main window
+    msg_box.grab_set()
+
+root = tk.Tk()
+root.withdraw()  # Hide the main window
+
+show_message_box()
+root.mainloop()
