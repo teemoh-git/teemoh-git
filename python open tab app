@@ -1,0 +1,29 @@
+import tkinter as tk
+import subprocess
+import os
+
+# Function to open the mp4 file
+def open_video():
+    video_path = "example.mp4"  # Replace with the path to your .mp4 file
+    if os.path.exists(video_path):
+        subprocess.Popen(["start", video_path], shell=True)  # For Windows
+        # For Mac use: subprocess.Popen(["open", video_path])
+        # For Linux use: subprocess.Popen(["xdg-open", video_path])
+    else:
+        print("Video file not found.")
+
+# Create main window
+root = tk.Tk()
+root.title("My Experience")
+root.geometry("300x150")
+
+# Add label
+label = tk.Label(root, text="Welcome to my experience", font=("Arial", 14))
+label.pack(pady=20)
+
+# Add button
+button = tk.Button(root, text="Play Video", command=open_video)
+button.pack()
+
+# Run the GUI loop
+root.mainloop()
