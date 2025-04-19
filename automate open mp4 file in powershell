@@ -1,0 +1,6 @@
+$scriptDir = $PSScriptRoot
+$mp4Files = Get-ChildItem -Path $scriptDir -Filter *.mp4
+
+foreach ($file in $mp4Files) {
+    Write-Output $file.FullName
+}
