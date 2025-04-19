@@ -1,0 +1,22 @@
+#include <windows.h>
+#include <shellapi.h>
+
+// Function to open MP4 file
+void OpenMP4File() {
+    ShellExecute(NULL, "open", "C:\\Path\\To\\Your\\Video.mp4", NULL, NULL, SW_SHOWNORMAL);
+}
+
+int main() {
+    int msgBoxID = MessageBox(
+        NULL,
+        "Do you want to play the video?",
+        "Video Player",
+        MB_ICONQUESTION | MB_YESNO
+    );
+
+    if (msgBoxID == IDYES) {
+        OpenMP4File();
+    }
+
+    return 0;
+}
