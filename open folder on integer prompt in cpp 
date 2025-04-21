@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <windows.h>
+
+int main() {
+    int choice;
+    std::cout << "Enter a number (1=Documents, 2=Downloads, 3=Pictures): ";
+    std::cin >> choice;
+
+    std::string folderPath;
+
+    switch (choice) {
+        case 1:
+            folderPath = "C:\\Users\\YourUsername\\Documents";
+            break;
+        case 2:
+            folderPath = "C:\\Users\\YourUsername\\Downloads";
+            break;
+        case 3:
+            folderPath = "C:\\Users\\YourUsername\\Pictures";
+            break;
+        default:
+            std::cout << "Invalid choice." << std::endl;
+            return 1;
+    }
+
+    // Open the folder
+    ShellExecuteA(NULL, "open", folderPath.c_str(), NULL, NULL, SW_SHOWDEFAULT);
+
+    return 0;
+}
