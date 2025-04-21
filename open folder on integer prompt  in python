@@ -1,0 +1,21 @@
+import os
+import subprocess
+
+# Dictionary mapping integers to folder paths
+folder_map = {
+    1: r"C:\Users\YourUsername\Documents",
+    2: r"C:\Users\YourUsername\Downloads",
+    3: r"C:\Users\YourUsername\Pictures"
+}
+
+# Prompt user for input
+try:
+    choice = int(input("Enter a number (1=Documents, 2=Downloads, 3=Pictures): "))
+    folder_path = folder_map.get(choice)
+
+    if folder_path and os.path.isdir(folder_path):
+        subprocess.run(["explorer", folder_path])
+    else:
+        print("Invalid choice or folder does not exist.")
+except ValueError:
+    print("Please enter a valid integer.")
