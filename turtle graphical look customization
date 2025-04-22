@@ -1,0 +1,30 @@
+import turtle
+
+# Set up the screen
+screen = turtle.Screen()
+screen.bgcolor("black")  # Background color
+
+# Create a turtle object
+t = turtle.Turtle()
+t.speed(1)
+t.color("green")  # Circle color
+t.pensize(3)
+
+# Draw a green circle
+t.penup()
+t.goto(0, -100)  # Move turtle to start drawing from bottom of circle
+t.pendown()
+t.circle(100)  # Radius of 100
+
+# Input text from user
+text = screen.textinput("Input", "Enter text to display in the circle:")
+
+# Display the text inside the circle
+t.penup()
+t.goto(0, 0)
+t.color("white")
+t.write(text, align="center", font=("Arial", 14, "bold"))
+
+# Finish
+t.hideturtle()
+turtle.done()
