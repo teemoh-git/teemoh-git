@@ -1,0 +1,44 @@
+#include <iostream>
+#include <conio.h>  // For getch() and kbhit()
+#include <windows.h> // For Sleep() and system("cls")
+
+using namespace std;
+
+int main() {
+    int x = 10, y = 5; // initial position
+    const string character = "o";
+
+    while (true) {
+        system("cls"); // clear screen
+
+        // Print empty lines to move vertically
+        for (int i = 0; i < y; ++i)
+            cout << endl;
+
+        // Print spaces to move horizontally, then print the character
+        for (int i = 0; i < x; ++i)
+            cout << " ";
+        cout << character << endl;
+
+        if (_kbhit()) {
+            int key = _getch();
+
+            // Arrow keys return 224 then the code
+            if (key == 224) {
+                key = _getch();
+                switch (key) {
+                    case 72: if (y > 0) y--; break; // up
+                    case 80: y++; break; // down
+                    case 75: if (x > 0) x--; break; // left
+                    case 77: x++; break; // right
+                }
+            } else if (key == 27) {
+                break; // ESC key to exit
+            }
+        }
+
+        Sleep(50); // reduce flicker
+    }
+
+    return 0;
+}
