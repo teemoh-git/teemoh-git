@@ -1,0 +1,68 @@
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("Pick Up the Stone")
+clock = pygame.time.Clock()
+
+# Colors
+SKY_BLUE = (135, 206, 235)
+PLAYER_COLOR = (0, 128, 0)
+TREE_COLOR = (34, 139, 34)
+STONE_COLOR = (139, 69, 19)
+
+# Player setup
+player = pygame.Rect(100, 100, 40, 60)
+speed = 5
+
+# Object positions
+tree = pygame.Rect(500, 300, 50, 100)
+stone = pygame.Rect(300, 400, 50, 50)
+stone_visible = True
+has_stone = False
+
+# Game loop
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    keys = pygame.key.get_pressed()
+
+    # Movement
+    if keys[pygame.K_LEFT]:
+        player.x -= speed
+    if keys[pygame.K_RIGHT]:
+        player.x += speed
+    if keys[pygame.K_UP]:
+        player.y -= speed
+    if keys[pygame.K_DOWN]:
+        player.y += speed
+
+    # Pick up stone if close and spacebar is pressed
+    if keys[pygame.K_SPACE] and stone_visible:
+        if player.colliderect(stone):
+            has_stone = True
+            stone_visible = False
+            print("Stone picked up!")
+
+    # Draw everything
+    screen.fill(SKY_BLUE)
+    pygame.draw.rect(screen, PLAYER_COLOR, player)
+
+    if stone_visible:
+        pygame.draw.rect(screen, STONE_COLOR, stone)
+
+    pygame.draw.rect(screen, TREE_COLOR, tree)
+
+    # Show message if carrying stone
+    if has_stone:
+        font = pygame.font.SysFont(None, 24)
+        text = font.render("Carrying stone!", True, (0, 0, 0))
+        screen.blit(text, (10, 10))
+
+    pygame.display.flip()
+    clock.tick(60)
