@@ -1,0 +1,135 @@
+import turtle
+
+turtle.bgcolor("black")
+#turtle.begin_poly()
+turtle.color("green","green")
+turtle.speed(10)
+
+turtle.begin_fill()
+
+turtle.circle(50)
+turtle.penup()
+turtle.goto(-100,50)
+
+turtle.end_fill()
+
+turtle.pendown()
+
+turtle.begin_fill()
+turtle.color("green",)
+for i in range(200):
+   
+    turtle.forward(200)
+    turtle.left(170)
+    turtle.speed(20)
+    
+turtle.end_fill()
+
+turtle.penup()
+turtle.goto(200,-50)
+turtle.color("red","red")
+turtle.begin_fill()
+turtle.goto(220,120)
+
+turtle.circle(50)
+
+turtle.end_fill()
+
+turtle.pendown()
+turtle.goto(300,50)
+turtle.begin_fill()
+turtle.color("red","red")
+for i in range(200):
+   
+    turtle.forward(200)
+    turtle.left(170)
+    turtle.speed(20)
+    
+turtle.end_fill()
+
+turtle.penup()
+turtle.goto(-200,20)
+turtle.pendown()
+turtle.begin_fill()
+turtle.color("white","white")
+turtle.circle(50)
+turtle.end_fill()
+
+turtle.penup()
+turtle.goto(-250,120)
+turtle.pendown()
+turtle.begin_fill()
+turtle.color("white","white")
+for i in range(200):
+   
+    turtle.forward(200)
+    turtle.left(170)
+    turtle.speed(20)
+    
+turtle.end_fill()
+turtle.penup()
+# %%
+turtle.goto(-10,-100)
+
+turtle.pendown()
+turtle.color("white","red")
+turtle.begin_fill()
+turtle.circle(50)
+
+
+turtle.end_fill()
+turtle.penup()
+turtle.goto(5,-200)
+turtle.pendown()
+turtle.begin_fill()
+for i in range(200):
+
+    turtle.color("red","red")
+    turtle.forward(200)
+    turtle.left(170)
+    turtle.speed(20)
+    
+turtle.end_fill()
+turtle.penup()
+turtle.goto(120,-120)
+turtle.color("red","green")
+turtle.begin_fill()
+turtle.circle(50)
+turtle.end_fill()
+
+turtle.goto(200,-1)
+turtle.begin_fill()
+turtle.pendown()
+turtle.goto(140,-10)
+for i in range(200):
+
+    turtle.color("green","green")
+    turtle.forward(200)
+    turtle.left(170)
+    turtle.speed(20)
+    
+turtle.end_fill()
+
+
+
+
+
+
+    
+    
+   # turtle.goto(-100,50)
+    
+    #for i in range(2000):
+        #turtle.color("red")
+       # turtle.forward(200)
+       # turtle.speed(20)
+    
+
+#turtle.end_poly()
+#assign the circle to a string character
+#c=turtle.get_poly()
+#turtle.register_shape("circle",c)
+#turtle.goto(-200,200)
+#turtle.shape("circle")
+
+turtle.done()
