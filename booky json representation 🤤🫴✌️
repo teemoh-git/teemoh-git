@@ -1,0 +1,115 @@
+import json
+import os
+import uuid
+
+# File to store user data
+DATA_FILE = "booky_data.json"
+
+# Load or initialize data
+def load_data():
+    if not os.path.exists(DATA_FILE):
+        return {}
+    with open(DATA_FILE, "r") as file:
+        return json.load(file)
+
+def save_data(data):
+    with open(DATA_FILE, "w") as file:
+        json.dump(data, file, indent=4)
+
+# Register new user
+def register():
+    data = load_data()
+    username = input("Choose a username: ")
+    if username in data:
+        print("Username already exists.")
+        return None
+
+    password = input("Choose a password: ")
+    user_id = str(uuid.uuid4())
+    data[username] = {
+        "id": user_id,
+        "password": password,
+        "books": {},
+        "rewards": []
+    }
+    save_data(data)
+    print(f"Registered successfully! Your user ID is: {user_id}")
+    return username
+
+# Login
+def login():
+    data = load_data()
+    username = input("Username: ")
+    password = input("Password: ")
+
+    if username in data and data[username]["password"] == password:
+        print(f"Welcome back, {username}!")
+        return username
+    else:
+        print("Invalid login.")
+        return None
+
+# Add or update book progress
+def update_book(username):
+    data = load_data()
+    book_name = input("Enter book name: ")
+    progress = int(input("Enter progress % (0-100): "))
+
+    data[username]["books"][book_name] = progress
+    check_rewards(username, data)
+    save_data(data)
+    print(f"Updated {book_name} to {progress}%.")
+
+# Check and give rewards
+def check_rewards(username, data):
+    user = data[username]
+    for book, progress in user["books"].items():
+        if progress >= 100 and f"Finished '{book}'" not in user["rewards"]:
+            user["rewards"].append(f"Finished '{book}'")
+            print(f"Congrats! You finished '{book}' and earned a reward!")
+
+# View books and rewards
+def view_profile(username):
+    data = load_data()
+    user = data[username]
+    print(f"\n--- {username}'s Profile ---")
+    print("Books:")
+    for book, progress in user["books"].items():
+        print(f" - {book}: {progress}%")
+    print("Rewards:")
+    for reward in user["rewards"]:
+        print(f" * {reward}")
+    print("---------------------------\n")
+
+# Main app loop
+def main():
+    print("Welcome to Booky!")
+    user = None
+    while not user:
+        print("1. Register\n2. Login\n3. Exit")
+        choice = input("Choose an option: ")
+        if choice == "1":
+            user = register()
+        elif choice == "2":
+            user = login()
+        elif choice == "3":
+            return
+        else:
+            print("Invalid choice.")
+
+    # Logged in menu
+    while True:
+        print("\n1. Update Book Progress\n2. View Profile\n3. Logout")
+        choice = input("Choose an option: ")
+        if choice == "1":
+            update_book(user)
+        elif choice == "2":
+            view_profile(user)
+        elif choice == "3":
+            print("Logged out.")
+            break
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
