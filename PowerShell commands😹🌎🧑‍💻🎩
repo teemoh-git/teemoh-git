@@ -1,0 +1,48 @@
+# File and Directory Commands
+Get-Location           # Displays the current directory
+Set-Location <path>    # Changes directory
+Get-ChildItem          # Lists files and folders (like 'ls')
+New-Item <name>        # Creates a new file or folder
+Remove-Item <name>     # Deletes a file or folder
+Copy-Item <source> <destination>   # Copies files/folders
+Move-Item <source> <destination>   # Moves/renames files/folders
+
+# System Info
+Get-Process            # Lists running processes
+Stop-Process -Name <name>  # Stops a process by name
+Get-Service            # Lists all services
+Start-Service <name>   # Starts a service
+Stop-Service <name>    # Stops a service
+Get-EventLog -LogName System  # Views system event log
+
+# User and Computer Info
+Get-ComputerInfo       # Displays detailed system info
+Get-User               # (If in AD) Gets user info
+Get-LocalUser          # Lists local user accounts
+Get-Date               # Shows the current date/time
+
+# Network
+Test-Connection <host>     # Pings a host
+Get-NetIPAddress           # Shows IP configuration
+Get-NetAdapter             # Lists network adapters
+Resolve-DnsName <host>     # DNS lookup
+
+# Package Management
+Get-Command                # Lists all available commands
+Get-Help <command>         # Shows help for a command
+Update-Help                # Updates help files
+Install-Module <name>      # Installs a PowerShell module
+Import-Module <name>       # Imports a module into the session
+
+# Variables and Scripting
+$var = "Hello"             # Declares a variable
+Write-Output $var          # Outputs the variable's value
+Read-Host "Enter input"    # Prompts for user input
+If ($var -eq "Hello") { Write-Output "Hi!" }   # Conditional
+ForEach ($item in $list) { Write-Output $item }  # Loop
+
+# Misc
+Clear-Host             # Clears the console
+Start-Sleep -Seconds 5 # Waits 5 seconds
+Get-History            # Shows command history
+Start-Process notepad  # Launches a program
