@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    std::string username;
+    std::string filename = "username.txt";
+
+    // Try to open the file for reading
+    std::ifstream infile(filename);
+    if (infile.good()) {
+        std::getline(infile, username);
+        infile.close();
+        std::cout << "Welcome back, " << username << "!" << std::endl;
+    } else {
+        std::cout << "Enter your username: ";
+        std::getline(std::cin, username);
+
+        std::ofstream outfile(filename);
+        if (outfile.is_open()) {
+            outfile << username;
+            outfile.close();
+            std::cout << "Username saved. Hello, " << username << "!" << std::endl;
+        } else {
+            std::cerr << "Error: Could not save username." << std::endl;
+        }
+    }
+
+    return 0;
+}
