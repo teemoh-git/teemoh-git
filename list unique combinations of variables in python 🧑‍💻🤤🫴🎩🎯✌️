@@ -1,0 +1,13 @@
+from itertools import permutations
+
+# Define your list of variables
+case1 = ['A', 'B', 'C']
+case2 = ['A', 'A', 'B']
+case3 = ['A', 'A', 'A']
+
+def unique_permutations(lst):
+    return set(permutations(lst))
+
+print("Case 1 (A, B, C):", unique_permutations(case1))
+print("Case 2 (A, A, B):", unique_permutations(case2))
+print("Case 3 (A, A, A):", unique_permutations(case3))
