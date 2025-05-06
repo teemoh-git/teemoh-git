@@ -1,0 +1,26 @@
+import requests
+import json
+
+# Replace with your Firebase database URL
+FIREBASE_URL = "https://your-project-id.firebaseio.com/"
+
+def save_info(info, filename="mydata"):
+    url = f"{FIREBASE_URL}{filename}.json"
+    response = requests.put(url, json=info)
+    print("Saved:", response.json())
+
+def get_info(filename="mydata"):
+    url = f"{FIREBASE_URL}{filename}.json"
+    response = requests.get(url)
+    print("Fetched:", response.json())
+    return response.json()
+
+# Example usage
+my_data = {
+    "name": "Alice",
+    "email": "alice@example.com",
+    "notes": "This is stored in the cloud!"
+}
+
+save_info(my_data)
+retrieved = get_info()
