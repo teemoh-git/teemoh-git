@@ -1,0 +1,19 @@
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
+import sys
+
+def on_click():
+    print("Button clicked!")
+
+app = QApplication(sys.argv)
+window = QWidget()
+window.setWindowTitle("PyQt5 Button")
+
+button = QPushButton("Click Me")
+button.clicked.connect(on_click)
+
+layout = QVBoxLayout()
+layout.addWidget(button)
+window.setLayout(layout)
+
+window.show()
+sys.exit(app.exec_())
