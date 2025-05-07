@@ -1,0 +1,28 @@
+#include <Python.h>
+
+int main() {
+    Py_Initialize();
+
+    PyObject *pName = PyUnicode_FromString("myscript");
+    PyObject *pModule = PyImport_Import(pName);
+    Py_DECREF(pName);
+
+    if (pModule != nullptr) {
+        PyObject *pFunc = PyObject_GetAttrString(pModule, "greet");
+        if (pFunc && PyCallable_Check(pFunc)) {
+            PyObject *pArgs = PyTuple_Pack(1, PyUnicode_FromString("World"));
+            PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+            Py_XDECREF(pArgs);
+            Py_XDECREF(pValue);
+        } else {
+            PyErr_Print();
+        }
+        Py_XDECREF(pFunc);
+        Py_DECREF(pModule);
+    } else {
+        PyErr_Print();
+    }
+
+    Py_Finalize();
+    return 0;
+}
