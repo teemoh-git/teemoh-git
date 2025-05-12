@@ -13,3 +13,21 @@ int main() {
         boost::asio::write(socket, boost::asio::buffer(msg));
     }
 }
+
+
+[N3_*t.]
+#include <boost/asio.hpp>
+#include <iostream>
+using boost::asio::ip::tcp;
+
+int main() {
+    boost::asio::io_context io;
+    tcp::resolver resolver(io);
+    auto endpoints = resolver.resolve("127.0.0.1", "12345");
+    tcp::socket socket(io);
+    boost::asio::connect(socket, endpoints);
+
+    char reply[128];
+    size_t reply_length = socket.read_some(boost::asio::buffer(reply));
+    std::cout << "Server: " << std::string(reply, reply_length) << "\n";
+}
