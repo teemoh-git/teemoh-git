@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> // for std::min
+
+void selectionSort(std::vector<int>& arr) {
+    int n = arr.size();
+
+    for (int i = 0; i < n - 1; ++i) {
+        int minIndex = i;
+
+        for (int j = i + 1; j < n; ++j) {
+            if (std::min(arr[j], arr[minIndex]) == arr[j]) {
+                minIndex = j;
+            }
+        }
+
+        std::swap(arr[i], arr[minIndex]);
+    }
+}
+
+int main() {
+    std::vector<int> data = {29, 10, 14, 37, 14};
+
+    selectionSort(data);
+
+    for (int num : data) {
+        std::cout << num << " ";
+    }
+
+    return 0;
+}
