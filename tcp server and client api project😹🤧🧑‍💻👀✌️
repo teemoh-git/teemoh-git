@@ -1,0 +1,15 @@
+#include <boost/asio.hpp>
+using boost::asio::ip::tcp;
+
+int main() {
+    boost::asio::io_context io;
+    tcp::acceptor acceptor(io, tcp::endpoint(tcp::v4(), 12345));
+
+    for (;;) {
+        tcp::socket socket(io);
+        acceptor.accept(socket);
+
+        std::string msg = "Welcome Player!";
+        boost::asio::write(socket, boost::asio::buffer(msg));
+    }
+}
