@@ -13,3 +13,12 @@ int main() {
         boost::asio::write(socket, boost::asio::buffer(msg));
     }
 }
+
+[A.pi_] interphase
+class MultiplayerSession {
+public:
+    void connect(const std::string& ip, int port);
+    void sendMessage(const std::string& msg);
+    void receiveMessages();
+    void disconnect();
+};
